@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rocket League Stats</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Rocket League Stats Viewer</h1>
+    <div class="input-group">
+      <input id="epicId" placeholder="Enter your Epic ID" />
+      <button onclick="fetchStats()">Search</button>
+    </div>
+    <div class="table-container">
+      <table id="statsTable">
+        <thead id="tableHead"></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    async function fetchStats() {
+      const epicId = document.getElementById('epicId').value.trim();
+      if (!epicId) return alert('Please enter a valid Epic ID.');
+
+      const response = await fetch(`/api/stats/${epicId}`);
+      const data = await response.json();
+
+      const tableHead = document.getElementById('tableHead');
+      const tableBody = document.getElementById('tableBody');
+
+      tableHead.innerHTML = '';
+      tableBody.innerHTML = '';
+
+      if (data.headers.length === 0 || data.values.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="10">No data found. Check the Epic ID.</td></tr>';
+        return;
+      }
+
+      const headRow = document.createElement('tr');
+      data.headers.forEach(h => {
+        const th = document.createElement('th');
+        th.innerText = h;
+        headRow.appendChild(th);
+      });
+      tableHead.appendChild(headRow);
+
+      const dataRow = document.createElement('tr');
+      data.values.forEach(v => {
+        const td = document.createElement('td');
+        td.innerText = v;
+        dataRow.appendChild(td);
+      });
+      tableBody.appendChild(dataRow);
+    }
+  </script>
+</body>
+</html>
