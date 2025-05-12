@@ -4,9 +4,15 @@ const cheerio = require('cheerio');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static('public'));
+// Serve static files from the root directory
+app.use(express.static(__dirname));
+
+// Define a route for the root path to serve index.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.get('/api/stats/:epicId', async (req, res) => {
   const epicId = req.params.epicId;

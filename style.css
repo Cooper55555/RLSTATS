@@ -63,6 +63,7 @@ button:hover {
   transform: translateY(-2px);
 }
 
+/* Table Layout */
 .table-container {
   overflow-x: auto;
   margin-top: 30px;
@@ -97,14 +98,68 @@ td {
   color: #c9d1d9;
 }
 
-tr:last-child td {
-  border-bottom: none;
+/* Header Row for Each Game Mode */
+.section-header {
+  background-color: #12151b;
+  font-size: 17px;
+  font-weight: bold;
+  color: #58a6ff;
+  text-align: center;
 }
 
+/* Sub-headers for RANK / DIVISION */
+.sub-label-row th {
+  background-color: #1c1f26;
+  color: #58a6ff;
+  text-transform: uppercase;
+  font-size: 14px;
+  border-top: 1px solid #30363d;
+}
+
+/* Rank and Division Value Row */
+.sub-value-row td {
+  font-size: 15px;
+  color: #c9d1d9;
+  font-weight: 500;
+  text-align: center;
+  background-color: #161b22;
+}
+
+/* Hover effect */
 tr:hover {
   background-color: #21262d;
 }
 
+/* Top Stats (Wins, Goals, etc.) grid style */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: #161b22;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.stat-card h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #58a6ff;
+  margin-bottom: 8px;
+}
+
+.stat-card p {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e6edf3;
+  margin: 0;
+}
+
+/* Responsive */
 @media (max-width: 600px) {
   h1 {
     font-size: 2.2rem;
